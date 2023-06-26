@@ -1,0 +1,13 @@
+<Configuration>
+    <Appenders>
+        <File name="FileAppender" fileName="logs/kafka.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="FileAppender" />
+        </Root>
+    </Loggers>
+    
+</Configuration>
