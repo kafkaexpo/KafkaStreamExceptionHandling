@@ -1,0 +1,23 @@
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.streams.errors.ProductionExceptionHandler;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class CustomProductionExceptionHandlerTest {
+    @Test
+    public void testHandle() {
+        // Create an instance of the custom production exception handler
+        CustomProductionExceptionHandler exceptionHandler = new CustomProductionExceptionHandler();
+
+        // Create a sample problematic ProducerRecord and Exception
+        ProducerRecord<byte[], byte[]> record = new ProducerRecord<>("topic", "key".getBytes(), "value".getBytes());
+        Exception exception = new RuntimeException("Simulated exception");
+
+        // Invoke the handle method and get the response
+        ProductionExceptionHandler.ProductionExceptionHandlerResponse response =
+                exceptionHandler.handle(record, exception);
+
+        // Assert the response is CONTINUE
+        Assertions.assertEquals(ProductionExceptionHandler.ProductionExceptionHandlerResponse.CONTINUE, response);
+    }
+}
